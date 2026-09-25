@@ -1,0 +1,40 @@
+# .github/labeler.yml
+
+version: v1
+
+labels:
+  - label: 'lab0'
+    sync: true
+    matcher:
+      title: '*Лабораторная работа 0.*'
+      
+  - label: 'lab1'
+    sync: true
+    matcher:
+      title: '*Лабораторная работа 1.*'
+      
+  - label: 'lab2'
+    sync: true
+    matcher:
+      title: '*Лабораторная работа 2.*'      
+    
+  - label: 'lab3'
+    sync: true
+    matcher:
+      title: '*Лабораторная работа 3.*'    
+  
+  - label: 'lab4'
+    sync: true
+    matcher:
+      title: '*Лабораторная работа 4.*'
+
+  - label: 'lab5'
+    sync: true
+    matcher:
+      title: '*Лабораторная работа 5.*'
+
+  - label: 'lab6'
+    sync: true
+    matcher:
+      title: '*Лабораторная работа 6.*'
+  
