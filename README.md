@@ -81,7 +81,7 @@ ___
 + [Лабораторная работа 6](/descriptions/laboratory_work_6.md) - 17.12.2026
 ___
 ### Оценивание
-[Ссылка]() на таблицу с баллами.  
+[Ссылка](https://docs.google.com/spreadsheets/d/17CQVC0I_o53j262K04Y-qp3boLfRF9sqr_aHXB9IzcM/edit?usp=sharing) на таблицу с баллами.  
 #### Разбалловка  
 
 TODO
