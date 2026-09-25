@@ -74,9 +74,9 @@ ___
 ### Работы и сроки сдачи:
 + [Лабораторная работа 0](/descriptions/laboratory_work_0.md) - 01.10.2026
 + [Лабораторная работа 1](/descriptions/laboratory_work_1.md) - 01.10.2026
-+ [Лабораторная работа 2](/descriptions/laboratory_work_2.md) - 08.10.2026
-+ [Лабораторная работа 3](/descriptions/laboratory_work_3.md) - 22.10.2026
-+ [Лабораторная работа 4](/descriptions/laboratory_work_4.md) - 05.11.2026
++ [Лабораторная работа 2](/descriptions/laboratory_work_2.md) - 11.10.2026
++ [Лабораторная работа 3](/descriptions/laboratory_work_3.md) - 25.10.2026
++ [Лабораторная работа 4](/descriptions/laboratory_work_4.md) - 08.11.2026
 + [Лабораторная работа 5](/descriptions/laboratory_work_5.md) - 26.11.2026
 + [Лабораторная работа 6](/descriptions/laboratory_work_6.md) - 17.12.2026
 ___
