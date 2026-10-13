@@ -1,0 +1,5 @@
+lab1_2
+lab2
+*.dSYM/
+.DS_Store
+.vscode/
