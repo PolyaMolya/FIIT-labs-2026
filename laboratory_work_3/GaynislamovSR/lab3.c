@@ -2,23 +2,22 @@
 #include <stdlib.h>
 #include <time.h>
 
-void mas1(int *a, int n) {
+void find_arr(int *a, int n) {
   int b[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
   int t = 10;
-  int j;
-  for (int i = 0; i < n; i++) {
-  	if (i != 0) j = rand()%t;
-  	else j = rand()%9+1;
+  int j = rand()%9+1;
+  a[0] = b[j];
+  b[j] = b[9];
+  b[9] = 0;
+  for (int i = 1; i < n; i++) {
+ 	j = rand()%t;
   	a[i] = b[j];
-
-  	int k = b[t-1];
-  	b[t-1] = 0;
-  	b[j] = k;
-  	t--;
+  	b[j] = b[--t];
+  	b[t] = 0;
   }
 }
 
-int mas2(int *b1, int b, int n) {
+int check_arr(int *b1, int b, int n) {
 	for (int i = n-1; i >= 0; i--) {
 		b1[i] = b%10;
 		b /= 10;
@@ -51,7 +50,7 @@ int main()
 	}
 
 	int *komp_a = (int*)malloc(sizeof(int) * n);
-	mas1(komp_a, n);
+	find_arr(komp_a, n);
 
 	int r = 0;
 	for (int i = n; i > 0; i--) {
@@ -62,7 +61,8 @@ int main()
 	while (flag == 1) {
 		int *user_a = (int*)malloc(sizeof(int)*n);
 		printf("введите %i-значное '> 0' число c неповторяющимися цифрами: ", n);
-		while (scanf("%i", &b)==0 || b < ten(n-1) || b > r || mas2(user_a, b, n)) {
+		while (scanf("%i", &b)==0 || b < ten(n-1) || b > r || 
+			   check_arr(user_a, b, n)) {
 			printf("Неверный ввод, повторите попытку: ");
 			while(getchar()!='\n');
 		}
