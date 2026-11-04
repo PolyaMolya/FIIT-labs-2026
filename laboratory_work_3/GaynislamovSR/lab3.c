@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-void find_arr(int *a, int n) {
+void fill_arr(int *a, int n) {
   int b[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
   int t = 10;
   int j = rand()%9+1;
@@ -50,7 +50,7 @@ int main()
 	}
 
 	int *komp_a = (int*)malloc(sizeof(int) * n);
-	find_arr(komp_a, n);
+	fill_arr(komp_a, n);
 
 	int r = 0;
 	for (int i = n; i > 0; i--) {
