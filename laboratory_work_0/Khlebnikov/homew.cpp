@@ -1,4 +1,4 @@
-﻿// homew.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
+﻿// otladka.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
 //
 
 #include <iostream>
@@ -16,14 +16,14 @@ int main()
 	else if (Ras == sum) {
 		printf("The circles touch");
 	}
-	else if (Ras < sum &&r1 < Ras &&r2<Ras) {
+	else if (Ras < sum && r1 < Ras && r2 < Ras) {
 		printf("The circles intersect");
 	}
-	else if (r1 > Ras || r2 > Ras) {
+	else if (r1 >= Ras || r2 >= Ras) {
 		if (x1 == x2 && y1 == y2) {
 			printf("The centers of the circles coincide");
 		}
-		else if ((r1>r2&&r1<Ras + r2) || (r2>r1&&r2 < Ras + r1)) {
+		else if ((r1 >= r2 && r1 < Ras + r2) || (r2 >= r1 && r2 < Ras + r1)) {
 			printf("The circles intersect, and one is inside the other");
 		}
 		else if (r1 == Ras + r2 || r2 == Ras + r1) {
@@ -33,7 +33,7 @@ int main()
 			printf("The circles do not intersect, and one is inside the other");
 		}
 	}
-	else  {
+	else {
 		printf("error");
 	}
 }
