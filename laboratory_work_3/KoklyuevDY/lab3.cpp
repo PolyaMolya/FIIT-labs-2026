@@ -11,6 +11,16 @@ int proverka(int a[], int count, int numb) {
     }
     return 1;
 }
+void zapolnmass(int a[], int n) {
+    a[0] = 1 + rand() % 9;
+    for (int i = 1;i < n;i++) {
+        int numb;
+        do {
+            numb = rand() % 10;
+        } while (proverka(a, i, numb) == 0);
+        a[i] = numb;
+    }
+}
 
 int main() {
     SetConsoleCP(65001);
@@ -22,18 +32,9 @@ int main() {
     scanf_s("%d", &n);
 
     if (n >= 2 && n <= 5) {
-        int a[5];
+        int* a = (int*)malloc(n * sizeof(int));
 
-        a[0] = 1 + rand() % 9;
-
-        for (int i = 1; i < n; i++) {
-            int numb;
-            do {
-                numb = rand() % 10;
-            } while (proverka(a, i, numb) == 0);
-            a[i] = numb;
-        }
-
+        zapolnmass(a, n);
         printf("Компьютер загадал %d-значное число. Попробуйте угадать.\n", n);
 
         int bulls = 0;
@@ -44,7 +45,7 @@ int main() {
             int number;
             scanf_s("%d", &number);
 
-            int guess[5];
+            int* guess = (int*)malloc(n * sizeof(int));
 
             for (int i = n - 1; i >= 0; i--) {
                 guess[i] = number % 10;
