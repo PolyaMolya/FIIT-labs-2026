@@ -11,21 +11,21 @@ int main()
     printf("введите x1 y1 r1 и x2 y2 r2");
     scanf_s("%f %f %f", &x1, &y1, &r1);
     scanf_s("%f %f %f", &x2, &y2, &r2);
-
+    float eps = 0.00001;
     float razn = sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)); //расстояние между центрами окр.
 
 
     
-    if (razn==0 && r1==r2){
+    if (razn < eps && fabs(r1 - r2) < eps) {
         printf("окружности совпадают");
     }
     else if (razn>r1+r2) {
         printf("окружности не соприкасаются и далеко друг от друга");
     }
-    else if (razn == r1 + r2) {
+    else if (fabs(razn - (r1 + r2)) < eps) {
         printf("внешнее касание в одной точке");
     }
-    else if (razn == fabs(r1-r2)){        // fabs - модуль
+    else if (fabs(razn - fabs(r1-r2))<eps){        // fabs - модуль
         printf("внутринее касание");
     
     }
