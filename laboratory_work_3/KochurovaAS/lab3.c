@@ -20,8 +20,8 @@ int main(){
         }
         while (flag == 0);
         n[i] = d;
-        printf("%i", n[i]);
     }
+    
     int b = 0, cow;
     while (b != x){
         b = 0, cow = 0;
