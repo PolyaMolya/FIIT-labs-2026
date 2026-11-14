@@ -2,10 +2,12 @@
 #include <math.h>
 
 int main() {
-    int x1, y1, r1, x2, y2, r2;
-    scanf("%i %i %i %i %i %i", &x1, &y1, &r1, &x2, &y2, &r2);
+    double x1, y1, r1, x2, y2, r2;
+    scanf("%lf %lf %lf %lf %lf %lf", &x1, &y1, &r1, &x2, &y2, &r2);
+    
     if (r1 >= r2){
-        double d = sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
+        double d = sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+        
         if (d > (r1 + r2)){
             printf("Окружности не пересекаются, одна вне другой");
         }
@@ -23,7 +25,8 @@ int main() {
         }
     }
     if (r1 < r2){
-        double d = sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
+        double d = sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+        
         if (d > (r1 + r2)){
             printf("Окружности не пересекаются, одна вне другой");
         }
