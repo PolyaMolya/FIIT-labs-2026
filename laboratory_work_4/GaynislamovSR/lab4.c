@@ -1,9 +1,9 @@
 #include <stdio.h>
 
-#define MX  4
-#define LEN 20
+#define MX 4
+#define LN 20
 
-char kod[LEN][MX] = 
+char kod[LN][MX] = 
 {{'0','1','9','2'},
  {'3','4','5','6'},
  {'7','8','0','1'},
@@ -24,7 +24,7 @@ char kod[LEN][MX] =
  {'5','7','2','9'},
  {'1','8','4','7'},
  {'6','2','9','5'}};
-char product[LEN][30] = 
+char product[LN][30] = 
 { "Хлеб",
 	"Молоко",
 	"Яйца",
@@ -45,10 +45,10 @@ char product[LEN][30] =
 	"Бананы",
 	"Сахар",
 	"Чай"};
-int skidki[LEN] = 
+int skidki[LN] = 
 {20, 30, 10, 25, 40, 35, 10, 5, 30, 50, 25, 15, 45, 40, 20, 
 10, 5, 15, 20, 50};
-int price[LEN] = 
+int price[LN] = 
 {60, 65, 100, 400, 80, 200, 450, 470, 300, 70, 50, 55, 45, 40, 120, 110, 90, 
 130, 75, 105};
 
@@ -66,8 +66,23 @@ char vvod()
 	return v;
 }
 
+int poisk(char scan[])
+{
+	int sv;
+	for (int i = 0; i < LN; i++) {
+		sv = 0;
+		for (int j = 0; j < MX; j++) {
+			if (scan[j] == kod[i][j]) sv++;
+			else continue;
+		}
+		if (sv == 4) return i;
+	}
+	return -1;
+}
+
 int v1(char scan[])
 {
+	int res;
 	char c;
 	char scan1[MX];
 
@@ -84,24 +99,14 @@ int v1(char scan[])
 	while ((c = getchar()) != '\n') 
 		return -2; 
 
+	res = poisk(scan1);
+
+	if (res == -1) return -3;
+
 	for (int i = 0; i < MX; i++) 
 		scan[i] = scan1[i];
 
-	return 0;
-}
-
-int poisk(char scan[])
-{
-	int sv;
-	for (int i = 0; i < LEN; i++) {
-		sv = 0;
-		for (int j = 0; j < MX; j++) {
-			if (scan[j] == kod[i][j]) sv++;
-			else continue;
-		}
-		if (sv == 4) return i;
-	}
-	return -1;
+	return res;
 }
 
 int itog(int x, int y, int z) {
@@ -110,7 +115,7 @@ int itog(int x, int y, int z) {
 }
 
 int proverka(int check[]) {
-	for (int i = 0; i < LEN; i++)
+	for (int i = 0; i < LN; i++)
 		if (check[i] > 0) return 1;
 	return 0;
 }
@@ -118,14 +123,14 @@ int proverka(int check[]) {
 int main() 
 {
 	char v;
-	int check[LEN] = {0};
+	int check[LN] = {0};
 	char scan[MX];
 	int inx = -1, res = -1;
 	int n, sum, skr;
 
 	for (;;) 
 	{
-		printf("Меню:\n");
+	printf("Меню:\n");
     printf(" 1. Сканировать товар\n");
     printf(" 2. Показать описание последнего отсканированного товара\n");
     printf(" 3. Добавить последний отсканированный товар в чек\n");
@@ -139,16 +144,12 @@ int main()
 
     else if (v == '1') {
     	res = v1(scan);
-    	if (res != 0) {
-    		printf("Ошибка ввода\n\n");
+    	if (res < 0) {
     		if (res == -2) while (getchar() != '\n');
+    		if (res == -3) printf("Товар не найден\n\n");
+    		else printf("Ошибка ввода\n\n");
     		continue;
     	} 
-    	res = poisk(scan);
-    	if (res == -1) {
-    		printf("Товар не найден\n\n");
-    		continue;
-    	}
     	else {
     		printf("Отсканирован товар: %s\n\n", product[res]);
     		inx = res;
@@ -183,12 +184,12 @@ int main()
     	printf("\nЧек:\n");
 
     	n = sum = skr = 0;
-    	for (int i = 0; i < LEN; i++) {
+    	for (int i = 0; i < LN; i++) {
     		if (check[i] > 0) {
     			res = itog(price[i], check[i], skidki[i]);
     			printf("%i %4s\n", ++n, product[i]);
     			printf("%ix%i => %iр(-%i%%)\n",
-    							price[i], check[i], res, skidki[i]);
+    					price[i], check[i], res, skidki[i]);
     			sum += price[i]*check[i];
     			skr += price[i]*check[i] - res;
     		}
@@ -200,7 +201,7 @@ int main()
     	printf("\n\n");
     }
     else if (v == '5') {
-    	for (int i = 0; i < LEN; i++)
+    	for (int i = 0; i < LN; i++)
     		check[i] = 0;
     	inx = res = -1;
     	printf("Чек очищен");
