@@ -1,4 +1,4 @@
-﻿// дз3.1.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
+﻿// 3.2.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
 //
 
 #include <iostream>
@@ -14,41 +14,41 @@ int main()
     if (n < 2 || n>5) {
         return 0;
     }
-
-    int* a = new int[n];
+    
+    int* a = (int*)malloc(n  * sizeof(int));
 
     for (int i = 0;i < n;i++) {
         a[i] = rand() % 10;
     }
-    
-     
-    
+
+
+
     int y;
-    int* b = new int[n];
-    
+    int* b = (int*)malloc(n  * sizeof(int));
+
     for (int i = 0;;i++) {
         int korov = 0;
         int bik = 0;
         printf("Enter a number\n");
         scanf_s("%i", &y);
         int u = y;
-        short f=0 ;
-        if (y>=10000) {
-           f=4 ;
+        short f = 0;
+        if (y >= 10000) {
+            f = 4;
         }
-        else if (y>=1000&&y<10000) {
-            f=3;
+        else if (y >= 1000 && y < 10000) {
+            f = 3;
         }
-        else if (y>=100&&y<1000) {
-            f=2;
+        else if (y >= 100 && y < 1000) {
+            f = 2;
         }
         else if (y >= 10 && y < 100) {
             f = 1;
         }
-        
+
         for (int j = 0;j < n;j++) {
             y = u;
-            
+
             if (j == 1) {
                 y = y / 10;
             }
@@ -69,7 +69,7 @@ int main()
             if (a[j] == b[j]) {
                 otvet++;
             }
-            
+
         }
         int m = 0;
         if (u >= 10000) {
@@ -82,10 +82,10 @@ int main()
             m = 3;
         }
         else if (u >= 10 && u < 100) {
-            m= 2;
+            m = 2;
         }
-        
-        if (otvet == m)  {
+
+        if (otvet == m) {
             printf("You guessed the number");
             break;
         }
@@ -102,9 +102,9 @@ int main()
         }
         korov = korov - bik;
         printf("%i korov and %i bikov\n", korov, bik);
-        
+
     }
 
-    delete a;
-    delete b;
+    free (a);
+    free (b);
 }
