@@ -33,6 +33,7 @@ int main() {
 
     if (n >= 2 && n <= 5) {
         int* a = (int*)malloc(n * sizeof(int));
+        int* guess = (int*)malloc(n * sizeof(int));
 
         zapolnmass(a, n);
         printf("Компьютер загадал %d-значное число. Попробуйте угадать.\n", n);
@@ -44,8 +45,7 @@ int main() {
 
             int number;
             scanf_s("%d", &number);
-
-            int* guess = (int*)malloc(n * sizeof(int));
+                      
 
             for (int i = n - 1; i >= 0; i--) {
                 guess[i] = number % 10;
@@ -71,10 +71,11 @@ int main() {
         }
 
         printf("Поздравляем! Вы отгадали всю последовательность!\n");
+        free(a);
+        free(guess);
     }
     else {
         printf("Введено неправильное число(\n");
     }
-
     return 0;
 }
