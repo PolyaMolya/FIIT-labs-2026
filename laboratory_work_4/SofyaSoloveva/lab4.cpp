@@ -9,7 +9,9 @@ int main() {
     SetConsoleCP(65001); // русский язык 
     SetConsoleOutputCP(65001);
 
-    char barcodes[20][5];  // шк (+1 для '\0')
+    char barcodes[20][5] = {
+    "0001", "0002", "0003", "0004", "0005", "0006", "0007", "0008", "0009", "0010",
+    "0011", "0012", "0013", "0014", "0015", "0016", "0017", "0018", "0019", "0020"};  // шк (+1 для '\0')
     char products[20][50] = 
     {"Тушь для ресниц", "Помада матовая", "Тональный крем", "Шампунь для волос", "Гель для душа",
         "Крем для рук", "Пенка для умывания", "Мицеллярная вода", "Тени для век", "Лак для ногтей",
@@ -25,18 +27,25 @@ int main() {
 
 
     for (int i = 0; i < 20; i++) {
-        sprintf_s(barcodes[i], "%04d", i + 1);
         prices[i] = 199 + rand() % (3000-199 +1); // min + rand() % (max - min + 1)
         discounts[i] = 1 + rand() % (50 - 1 + 1);
     }
     
-    printf("Отсканируйте товар и введите '1', если хотите сканировать товары дальше. Когда закончите, введите '0'.\n");
+    printf("\n--- ДОСТУПНЫЕ ТОВАРЫ ---\n");    
+    printf("[4-значный код] - [Название товара]\n");
+
+    for (int i = 0; i < 20; i++) {
+        printf("%s - %s \n", barcodes[i], products[i]);
+    }
+    printf("\n------------------------\n");
+    printf("ВВОД: [4-значный код] [1 - продолжить / 0 - завершить].\n");
+    printf("Пример: 0005 1\n\n");
+
     char code[5] = {0};
     int a;
     while (1) {
-        printf("Штрих-код: ");
-        scanf_s("%s %d", code, (unsigned int)sizeof(code), &a); 
-
+        printf("ВВОД: [4-значный код] [1 - продолжить / 0 - завершить].\n");
+        scanf_s("%s %d", code, (unsigned int)sizeof(code), &a);
         int f = 0; // поиск товара в массиве
         for (int i = 0; i < 20; i++) {
             if (strcmp(barcodes[i], code) == 0) {  // сравнение строк
@@ -84,10 +93,10 @@ int main() {
             summa_without_discount += prices[product_incheck[i]] * count_all[i];
             discount += (prices[product_incheck[i]] * count_all[i]) - (prices[product_incheck[i]] * ((100 - discounts[product_incheck[i]]) * 0.01) * count_all[i]);
             
-            printf("Товар: %s  |  Стоимость за единицу: %d  |  Количество: %d  |  Общая стоимость товар(а/ов): %d\n",
+            printf("Товар: %s  |  Стоимость за единицу: %d  |  Количество: %d  |  Общая стоимость товар(а/ов): %d \n",
                 products[product_incheck[i]], prices[product_incheck[i]], count_all[i], (prices[product_incheck[i]] * count_all[i]));
         }
-        printf("Итого:\nСтоимость товар(а/ов) без скидки:  %d\nСкидка: %.2f\n Стоимость товар(а/ов) с учётом скидки:  %.2f\n", 
+        printf("Итого:\nСтоимость товар(а/ов) без скидки:  %d\nСкидка: %.2f\nСтоимость товар(а/ов) с учётом скидки:  %.2f \n", 
             summa_without_discount, discount, summa_wtih_discount);
     }
     return 0;
