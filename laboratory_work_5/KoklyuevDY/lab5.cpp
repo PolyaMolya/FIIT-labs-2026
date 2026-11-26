@@ -108,52 +108,78 @@ void radixSort(unsigned int* arr, int n) { // 4
 }
 void vivod(unsigned int* arr, int n, int pick) {
 	int pick2;
-	clock_t start = 0, end = 0;
+	int pick3 = 1;
+	double predTime = 0;
 	if (pick >= 1 && pick <= 4) {
-		printf("Выбрана сортировка %d. Хотите увидеть изначальный и отсортированный массивы? 0 - нет, 1 - да ", pick);
+		printf("Выбрана сортировка %d. Хотите увидеть изначальный и отсортированный массивы? (0 - нет, 1 - да) ", pick);
 		scanf_s("%d", &pick2);
 		if (pick2 != 0 && pick2 != 1) {
 			printf("Введено неправильное число\n");
+			free(arr);
 			return;
 		}
-		if (pick2 == 1) {
-			printmass(arr, n);
-		}
-		switch (pick) {
-		case 1: {
+		while (1) {
+			clock_t start = 0, end = 0;
+			unsigned int* arr2 = (unsigned int*)malloc(n * sizeof(unsigned int));
+			for (int i = 0;i < n;i++) {
+				arr2[i] = arr[i];
+			}
 			start = clock();
-			insertionSort(arr, n);
+			bubbleSort(arr2, n);
 			end = clock();
-			break;
+			double bubbleTime = (double)(end - start) / CLOCKS_PER_SEC;
+			free(arr2);
+			if (pick2 == 1) {
+				printmass(arr, n);
+			}
+			switch (pick) {
+			case 1: {
+				start = clock();
+				insertionSort(arr, n);
+				end = clock();
+				break;
+			}
+			case 2: {
+				unsigned int* b = (unsigned int*)malloc(n * sizeof(unsigned int));
+				start = clock();
+				mergeSort(arr, n, b);
+				end = clock();
+				free(b);
+				break;
+			}
+			case 3: {
+				start = clock();
+				bubbleSort(arr, n);
+				end = clock();
+				break;
+			}
+			case 4: {
+				start = clock();
+				radixSort(arr, n);
+				end = clock();
+				break;
+			}
+			}
+			if (pick2 == 1) {
+				printmass(arr, n);
+			}
+			double resTime = (double)(end - start) / CLOCKS_PER_SEC;
+			printf("\nКоличество элементов массива: %d | Время сортировки %d: %lf | Время сортировки пузырьком: %lf\n\n", n, pick, resTime, bubbleTime);
+			printf("На сколько умножить количество элементов (0 - выход в меню)? ");
+			scanf_s("%d", &pick3);
+			if (pick3 <= 0) {
+				printf("\n");
+				return;
+			}
+			n = n * pick3;
+			free(arr);
+			arr = (unsigned int*)malloc(n * sizeof(unsigned int));
+			randmass(arr, n);
 		}
-		case 2: {
-			unsigned int* b = (unsigned int*)malloc(n * sizeof(unsigned int));
-			start = clock();
-			mergeSort(arr, n, b);
-			end = clock();
-			free(b);
-			break;
-		}
-		case 3: {
-			start = clock();
-			bubbleSort(arr, n);
-			end = clock();
-			break;
-		}
-		case 4: {
-			start = clock();
-			radixSort(arr, n);
-			end = clock();
-			break;
-		}
-		}
-		if (pick2 == 1) {
-			printmass(arr, n);
-		}
-		double resTime = (double)(end - start) / CLOCKS_PER_SEC;
-		printf("\nКоличество элементов массива: %d | Время сортировки: %lf\n", n, resTime);
+
 	}
 	else printf("Введен неправильный номер типа сортировки");
+	free(arr);
 }
 int main() {
 	SetConsoleCP(65001);
@@ -161,18 +187,23 @@ int main() {
 	srand(time(NULL));
 	int n;
 	int pick;
-	printf("Введите количество элементов массива (n >= 1): ");
-	scanf_s("%d", &n);
-	if (n < 1) {
-		printf("Введено неверное количество элементов массива");
-		return 0;
+	while (1) {
+		printf("================МЕНЮ================\n");
+		printf("Введите количество элементов массива (для выхода введите '0'): ");
+		scanf_s("%d", &n);
+		if (n == 0) {
+			return 0;
+		}
+		if (n < 1) {
+			printf("Введено неверное количество элементов массива");
+			return 0;
+		}
+		unsigned int* arr = (unsigned int*)malloc(n * sizeof(unsigned int));
+		randmass(arr, n);
+		printf("Сортировки на выбор:\n1.Сортировка вставками - InsertionSort\n2.Сортировка слиянием - MergeSort\n3.Сортировка пузырьком - BubbleSort\n4.Поразрядная сортировка - RadixSort\n");
+		printf("Выберите тип сортировки: ");
+		scanf_s("%d", &pick);
+		vivod(arr, n, pick);
 	}
-	unsigned int* arr = (unsigned int*)malloc(n * sizeof(unsigned int));
-	randmass(arr, n);
-	printf("Сортировки на выбор:\n1.Сортировка вставками - InsertionSort\n2.Сортировка слиянием - MergeSort\n3.Сортировка пузырьком - BubbleSort\n4.Поразрядная сортировка - RadixSort\n");
-	printf("Выберите тип сортировки: ");
-	scanf_s("%d", &pick);
-	vivod(arr, n, pick);
-	free(arr);
 	return 0;
 }
